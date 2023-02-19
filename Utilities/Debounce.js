@@ -15,13 +15,15 @@ let debounce = debounceHelper();
 
 function throttleHelper() {
   let pending;
+  let latestArgs;
   const throttle = (f, t, ...args) => {
     console.log('>>>>here', pending);
+    latestArgs = args;
     if (pending) {
       return void 0;
     }
     pending = setTimeout(() => {
-      f(...args);
+      f(...latestArgs);
       pending = false;
     }, t);
   };
